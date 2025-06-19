@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos de Programación en C</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .brand-gradient {
+            background: linear-gradient(90deg, #0A4D68, #088395, #05BFDB, #00FFCA);
+        }
+        .flowchart-node {
+            border: 2px solid #088395;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            color: #0A4D68;
+            font-weight: bold;
+        }
+        .flowchart-arrow {
+            position: relative;
+            width: 100%;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .flowchart-arrow::after {
+            content: '▼';
+            font-size: 1.5rem;
+            color: #088395;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Encabezado -->
+    <header class="brand-gradient text-white p-8 text-center sticky top-0 z-10 shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-bold mb-2">Fundamentos de Programación en C</h1>
+        <p class="text-lg md:text-xl">Una guía visual desde los algoritmos hasta las estructuras de control.</p>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="p-4 md:p-8">
+        <div class="max-w-5xl mx-auto">
+
+            <!-- Sección 1: Introducción a la Programación -->
+            <section id="intro" class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-3xl font-bold text-[#0A4D68] mb-4 border-b-2 border-[#05BFDB] pb-2">1. Introducción a la Programación</h2>
+                <p class="text-lg mb-4">La programación es el arte de dar instrucciones a una computadora para resolver problemas. Todo comienza con un **algoritmo**, que es una secuencia de pasos lógicos y precisos. Estos algoritmos, una vez escritos en un lenguaje de programación como C, se convierten en programas que pueden ser entendidos por la máquina a través de un **compilador** (que traduce todo el código de una vez) o un **intérprete** (que traduce línea por línea).</p>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-[#088395] mb-2">Compilador vs. Intérprete</h3>
+                        <p class="mb-4">El lenguaje C es compilado. Un compilador traduce el código fuente completo a lenguaje máquina, creando un archivo ejecutable optimizado. Esto resulta en programas muy rápidos, aunque el proceso de desarrollo requiere una compilación tras cada cambio.</p>
+                        <div class="chart-container">
+                            <canvas id="compilerVsInterpreterChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                         <h3 class="text-2xl font-bold text-[#088395] mb-2">Diagrama de Flujo: Tomar un Café</h3>
+                         <p class="mb-4">Un diagrama de flujo es una representación visual de un algoritmo. Muestra las decisiones y acciones de forma clara y universal, siendo una herramienta clave en el diseño de programas.</p>
+                         <div class="flowchart-node">Quiero Café</div>
+                         <div class="flowchart-arrow"></div>
+                         <div class="flowchart-node">¿Hay café hecho?</div>
+                         <div class="flex justify-between w-full mt-2">
+                            <div class="flex-1 text-center">
+                               <p class="text-sm font-bold text-red-500">NO</p>
+                               <div class="flowchart-arrow" style="transform: rotate(90deg) translateX(20px);"></div>
+                               <div class="flowchart-node">Hacer Café</div>
+                            </div>
+                            <div class="flex-1 text-center">
+                               <p class="text-sm font-bold text-green-500">SI</p>
+                               <div class="flowchart-arrow" style="transform: rotate(-90deg) translateX(20px);"></div>
+                               <div class="flowchart-node">Calentar Café</div>
+                            </div>
+                         </div>
+                         <div class="flowchart-arrow"></div>
+                         <div class="flowchart-node">Servir en taza y añadir azúcar</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 2: Fundamentos del Programa -->
+            <section id="fundamentos" class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-3xl font-bold text-[#0A4D68] mb-4 border-b-2 border-[#05BFDB] pb-2">2. Fundamentos del Programa en C</h2>
+                <p class="text-lg mb-4">Un programa en C tiene una estructura básica y utiliza elementos fundamentales para manejar datos. El punto de entrada es siempre la función `main()`. Dentro de ella, usamos **variables** para almacenar datos, especificando su **tipo** (entero, decimal, carácter, etc.). También podemos definir **constantes** para valores fijos y usar **operadores** para realizar cálculos y comparaciones.</p>
+                 <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-[#088395] mb-2">Tipos de Datos Principales en C</h3>
+                        <p class="mb-4">C maneja diferentes tipos de datos, cada uno ocupando un espacio distinto en memoria y permitiendo diferentes rangos de valores.</p>
+                        <div class="chart-container">
+                            <canvas id="dataTypesChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-[#088395] mb-2 text-center">Tipos de Operadores</h3>
+                        <ul class="list-disc list-inside text-left space-y-2">
+                            <li><strong class="text-[#0A4D68]">Aritméticos:</strong> Para realizar operaciones matemáticas (+, -, *, /, %).</li>
+                            <li><strong class="text-[#0A4D68]">Relacionales:</strong> Para comparar valores (==, !=, <, >, <=, >=).</li>
+                            <li><strong class="text-[#0A4D68]">Lógicos:</strong> Para combinar expresiones lógicas (&& AND, || OR, ! NOT).</li>
+                            <li><strong class="text-[#0A4D68]">Asignación:</strong> Para asignar valores a variables (=, +=, -=, etc.).</li>
+                            <li><strong class="text-[#0A4D68]">Incremento/Decremento:</strong> Para sumar o restar 1 a una variable (++ , --).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 3: Estructuras de Control -->
+            <section id="control" class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-3xl font-bold text-[#0A4D68] mb-4 border-b-2 border-[#05BFDB] pb-2">3. Estructuras de Control</h2>
+                <p class="text-lg mb-4">Las estructuras de control nos permiten alterar el flujo secuencial de un programa, tomando decisiones y repitiendo acciones. Son la base para crear programas dinámicos y funcionales.</p>
+                
+                <h3 class="text-2xl font-bold text-[#088395] mt-6 mb-2">Estructuras de Selección (Decisión)</h3>
+                <p class="text-lg mb-4">Estas estructuras permiten que el programa elija qué bloque de código ejecutar basándose en una condición.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-xl font-bold text-[#0A4D68] text-center">if / if-else</h4>
+                        <p>Ejecuta un bloque de código si una condición es verdadera. `if-else` añade un bloque alternativo si la condición es falsa.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-xl font-bold text-[#0A4D68] text-center">switch-case</h4>
+                        <p>Evalúa una variable y ejecuta un bloque de código (`case`) según su valor. Es ideal para múltiples opciones.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-[#088395] mt-8 mb-2">Estructuras de Repetición (Bucles)</h3>
+                <p class="text-lg mb-4">Permiten ejecutar un bloque de código múltiples veces hasta que se cumpla una condición.</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <h4 class="text-xl font-bold text-[#0A4D68]">while</h4>
+                        <p>Repite un bloque mientras la condición sea verdadera. La condición se evalúa **antes** de cada iteración. Puede no ejecutarse nunca.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <h4 class="text-xl font-bold text-[#0A4D68]">do-while</h4>
+                        <p>Repite un bloque mientras la condición sea verdadera. La condición se evalúa **después** de cada iteración. Se ejecuta al menos una vez.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <h4 class="text-xl font-bold text-[#0A4D68]">for</h4>
+                        <p>Ideal para iterar un número conocido de veces. Agrupa la inicialización, la condición y el incremento en una sola línea.</p>
+                    </div>
+                </div>
+                 <div class="mt-8">
+                    <h3 class="text-2xl font-bold text-[#088395] mb-2 text-center">Comparación de Bucles: ¿Cuándo usar cada uno?</h3>
+                    <div class="chart-container">
+                        <canvas id="loopComparisonChart"></canvas>
+                    </div>
+                 </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const tooltipTitleCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            } else {
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Gráfico 1: Compilador vs Intérprete
+        const compilerVsInterpreterCtx = document.getElementById('compilerVsInterpreterChart').getContext('2d');
+        new Chart(compilerVsInterpreterCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Velocidad de Ejecución', 'Flexibilidad de Desarrollo'],
+                datasets: [{
+                    label: 'Compilador (C)',
+                    data: [90, 40],
+                    backgroundColor: '#0A4D68',
+                }, {
+                    label: 'Intérprete (Python)',
+                    data: [50, 85],
+                    backgroundColor: '#05BFDB',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: { display: true, text: 'Puntuación Relativa' }
+                    }
+                },
+                ...tooltipTitleCallback
+            }
+        });
+
+        // Gráfico 2: Tipos de Datos
+        const dataTypesCtx = document.getElementById('dataTypesChart').getContext('2d');
+        new Chart(dataTypesCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Enteros (int, long)', 'Decimales (float, double)', 'Carácter (char)', 'Lógico (bool)'],
+                datasets: [{
+                    label: 'Uso Común de Tipos de Datos',
+                    data: [45, 35, 15, 5],
+                    backgroundColor: ['#0A4D68', '#088395', '#05BFDB', '#00FFCA'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                ...tooltipTitleCallback
+            }
+        });
+        
+        // Gráfico 3: Comparación de Bucles
+        const loopComparisonCtx = document.getElementById('loopComparisonChart').getContext('2d');
+        new Chart(loopComparisonCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Iteraciones Conocidas', ['Control de Condición', 'al Inicio'], ['Ejecución Mínima', 'Garantizada'], 'Flexibilidad', 'Sintaxis Compacta'],
+                datasets: [{
+                    label: 'for',
+                    data: [9, 6, 2, 7, 9],
+                    fill: true,
+                    backgroundColor: 'rgba(10, 77, 104, 0.2)',
+                    borderColor: '#0A4D68',
+                    pointBackgroundColor: '#0A4D68',
+                }, {
+                    label: 'while',
+                    data: [4, 9, 2, 8, 4],
+                    fill: true,
+                    backgroundColor: 'rgba(8, 131, 149, 0.2)',
+                    borderColor: '#088395',
+                    pointBackgroundColor: '#088395',
+                }, {
+                    label: 'do-while',
+                    data: [3, 4, 9, 8, 3],
+                    fill: true,
+                    backgroundColor: 'rgba(5, 191, 219, 0.2)',
+                    borderColor: '#05BFDB',
+                    pointBackgroundColor: '#05BFDB',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                elements: {
+                  line: {
+                    borderWidth: 3
+                  }
+                },
+                ...tooltipTitleCallback
+            }
+        });
+
+    </script>
+</body>
+</html>
